@@ -4,7 +4,7 @@ import Loading from "./Loading.js"
 import Profile from "./Profile.js"
 import Signup from "./Signup.js"
 import Login from "./Login.jsx"
-import Home from "./home.jsx"
+import Home from "./Home.jsx"
 import Nav from "./Nav.js"
 
 console.log('hi git')
