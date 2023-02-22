@@ -62,13 +62,14 @@ const cohortController = {
 
         // }
     },
+
+    // here we will get rid of the update to user
     async chosenUser(req, res, next) {
-        //   const user = await User.findOne({username:req.body.username})
-        const user = await User.findOneAndUpdate(
-            { username: req.body.username },
-            { $inc: { participation: 1 } },
-            { new: true }
-        );
+        // const user = await User.findOneAndUpdate(
+        //     { username: req.body.username },
+        //     { $inc: { participation: 1 } },
+        //     { new: true }
+        // );
         const cohort = await Cohort.findOneAndUpdate(
             { cohort: req.params.cohort },
             { $pull: { students: { username: user.username } }, $push: { chosen: user } },

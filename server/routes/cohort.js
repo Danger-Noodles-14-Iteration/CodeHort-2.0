@@ -17,6 +17,9 @@ cohortController.newCohort,
 // res.status(200).json(res.locals.cohort)
 // )
 
+// this approach requires a change in the the front end patch request functionality, adding a patch request on tracker button clicks
+// right now it is activated by chosenUser and increments through the cohortController, we want it to increment through userController
+
 router.patch('/chosenuser/:cohort',
 cohortController.chosenUser,
 (req,res,next)=>{
