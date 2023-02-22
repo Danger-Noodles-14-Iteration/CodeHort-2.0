@@ -58,10 +58,9 @@ const userController = {
 
     async getUser(req, res, next) {
         // we find our user from the collection
-        const username = req.body.username;
-        const doc = await User.findOne({ username: username });
-        const user = doc.json();
-        // pass it in locals
+        const username = req.params.username;
+        const user = await User.findOne({ username: username });
+        // pass user in locals
         res.locals.user = user;
         return next();
     },
@@ -76,9 +75,10 @@ const userController = {
             // find doc of our user, username will be passed in body, we increment the tracker
             const user = await User.findOneAndUpdate({ username: req.body.username},
                 { $inc: { [tracker]: 1 } },
-                { new: true });
+                { new: true }
+            );
             // we pass the user to locals to respond with it
-            res.locals.user = user;
+            res.locals.userTrackerIncremented = user[tracker];
             return next()
         // here we error handle incase there is a wrong input to our collection
         } catch (err) {
@@ -113,8 +113,7 @@ const userController = {
     async getSocials(req, res, next) {
         try{
             // we find our user and grab their socials
-            const doc = await User.findOne({ username: req.body.username });
-            const user = doc.json();
+            const user = await User.findOne({ username: req.body.username });
             const socials = user.socials;
             // we presist our user to locals to respond w user obj
             res.locals.userSocials = socials;

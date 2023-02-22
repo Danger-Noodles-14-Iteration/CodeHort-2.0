@@ -25,28 +25,18 @@ userController.login,
 )
 
 // this grabs the our user
-router.get("/info",
+router.get("/:username",
 userController.getUser,
 (req,res,next) => {
-  res.status(200).json(res.locals.userSocials);
+  res.status(200).json(res.locals.user);
 }
 )
-
-
-// * need to modularize the addpoint feature for new trackers
-
-// router.patch("/addpoint",
-// userController.addpoint,
-// (req,res,next) => {
-//   res.status(200).json(res.locals.user);
-// }
-// )
 
 // a route to handle increment to a particular tracker prop
 router.patch("/add/:tracker",
 userController.addToTracker,
 (req,res,next) => {
-  res.status(200).json(res.locals.user);
+  res.status(200).json(res.locals.userTrackerIncremented);
 }
 )
 
