@@ -20,25 +20,17 @@ const UserSchema = new mongoose.Schema({
   isAdmin: { type: String, default: "" }
 })
 
-UserSchema.pre('save', async function (next) {
+UserSchema.pre("save", async function (next) {
   const saltRounds = 10;
   this.password = await bcrypt.hash(this.password, saltRounds);
-  return next()
-})
+  return next();
+});
 
-
-
-const Userdb = mongoose.model('userdb', UserSchema);
+const Userdb = mongoose.model("userdb", UserSchema);
 
 module.exports = Userdb;
 
-
-
-
-
-
 // const mongoose = require('mongoose');
-
 
 // const CohortSchema = new mongoose.Scheme({
 //     cohortNumber: {type: String, required: true},
@@ -49,46 +41,10 @@ module.exports = Userdb;
 
 // module.exports = Cohortdb;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // const bcrypt = require('bcrypt');
 // // const { stringify } = require('postcss');
 
-
 // const Schema = mongoose.Schema;
-
 
 // const UserSchema = new Schema({
 //     username: { type: String, required: true },
