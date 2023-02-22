@@ -3,5 +3,32 @@
 @tailwind utilities;
 @import url("https://fonts.googleapis.com/css2?family=Barlow&family=Cabin&family=Oswald&family=PT+Sans&family=Silkscreen&display=swap");
 
-* {
+
+
+* { 
+    
+}
+
+.popup-modal {
+  background-color: rgba(0,0,0,.5);
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+}
+
+.popup-modal > .info-container {
+  height: 500px;
+  width: 500px;
+  background-color: whitesmoke;
+  margin-top: 150px;
+  border-radius: 25px;
+  padding: 50px;
+}
+
+.popup-modal > .info-container > header {
+  display: flex;
+  justify-content: space-between;
 }

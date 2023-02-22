@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { Link, Route, Routes, useNavigate } from "react-router-dom";
-import Loading from "./Loading.js";
-import Profile from "./Profile.js";
-import Signup from "./Signup.js";
-import Login from "./Login.jsx";
-import Home from "./home.jsx";
-import Nav from "./Nav.js";
-import Switcher from "./switcher.js";
+import React, { useEffect, useState } from "react"
+import { Link, Route, Routes, useNavigate } from 'react-router-dom'
+import Loading from "./Loading.js"
+import Profile from "./Profile.js"
+import Signup from "./Signup.js"
+import Login from "./Login.jsx"
+import Home from "./home.jsx"
+import Nav from "./Nav.js"
+import PopupModal from "./PopupModal.js"
+import Switcher from "./switcher.js"
 
 console.log("hi git");
 
@@ -19,6 +20,9 @@ const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [cohort, setCohort] = useState("");
 
+  const [modalState, setModalState] = useState(false);
+  const [currentStudent, setCurrentStudent] = useState({});
+
   //******************** handler functions */
 
   const handleUsername = (e) => {
@@ -27,6 +31,18 @@ const App = () => {
   };
   const handlePassword = (e) => setPassword(e.target.value);
   const handleCohort = (e) => setCohort(e.target.value);
+
+  const getOneStudent = async (name) => {
+    try {
+      const response = await fetch(`/user/${name}`);
+      const data = await response.json();
+    } catch (err) {
+      alert(`ERROR: ${err}`);
+    }
+
+    setModalState(true);
+
+  }
 
   //************************ fetch requests ************************* */
   const navigate = useNavigate();
@@ -92,6 +108,7 @@ const App = () => {
 
   return (
     <div className="dark:bg-gray-800">
+      {modalState ? <PopupModal setModalState={setModalState} /> : null}
       <Nav currUser={currUser} signout={signout} loggedIn={loggedIn} />
       <Routes>
         <Route
@@ -101,6 +118,7 @@ const App = () => {
               allCohorts={allCohorts}
               getAllCohorts={getAllCohorts}
               createUser={createUser}
+              getOneStudent={getOneStudent}
             />
           }
         />
