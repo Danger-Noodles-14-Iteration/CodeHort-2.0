@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react"
-import { Link, Route, Routes, useNavigate } from 'react-router-dom'
-import Loading from "./Loading.js"
-import Profile from "./Profile.js"
-import Signup from "./Signup.js"
-import Login from "./Login.jsx"
-import Home from "./home.jsx"
-import Nav from "./Nav.js"
-import PopupModal from "./PopupModal.js"
-import Switcher from "./switcher.js"
+import React, { useEffect, useState } from "react";
+import { Link, Route, Routes, useNavigate } from "react-router-dom";
+import Loading from "./Loading.js";
+import Profile from "./Profile.js";
+import Signup from "./Signup.js";
+import Login from "./Login.jsx";
+import Home from "./home.jsx";
+import Nav from "./Nav.js";
+import PopupModal from "./PopupModal.js";
+import Switcher from "./switcher.js";
 
 console.log("hi git");
 
@@ -108,7 +108,7 @@ const App = () => {
   console.log("app component all cohorts", allCohorts);
 
   return (
-    <div className="dark:bg-gray-800">
+    <div className="">
       {modalState ? <PopupModal setModalState={setModalState} currentStudent={currentStudent} /> : null}
       <Nav currUser={currUser} signout={signout} loggedIn={loggedIn} />
       <Routes>
