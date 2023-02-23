@@ -6,7 +6,6 @@ import Signup from "./Signup.js";
 import Login from "./Login.jsx";
 import Home from "./home.jsx";
 import Nav from "./Nav.js";
-import Switcher from "./switcher.js";
 
 console.log("hi git");
 
@@ -91,7 +90,7 @@ const App = () => {
   console.log("app component all cohorts", allCohorts);
 
   return (
-    <div className="dark:bg-gray-800">
+    <div className="">
       <Nav currUser={currUser} signout={signout} loggedIn={loggedIn} />
       <Routes>
         <Route
