@@ -22,11 +22,11 @@ userController.getUser,
 }
 )
 
-// a route to handle increment to a particular tracker prop
+// a route to handle increment to a particular tracker props
 router.patch("/add/:tracker",
 userController.addToTracker,
 (req,res,next) => {
-  res.status(200).json(res.locals.userTrackerIncremented);
+  res.status(200).json({ trackerStat: res.locals.userTrackerIncremented });
 }
 )
 

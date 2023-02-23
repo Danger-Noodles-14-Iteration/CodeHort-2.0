@@ -3,10 +3,11 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
-// we removed the participation prop and adding trackers and a socials prop which will contain strings on the links in an array
+// adding trackers and a socials prop which will contain strings on the links in an array
 const UserSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  participation: { type: Number, default: 0 },
   cohort: { type: Number, required: true },
   raisedHand: { type: Number, default: 0 },
   codeOfConduct: { type: Number, default: 0 },

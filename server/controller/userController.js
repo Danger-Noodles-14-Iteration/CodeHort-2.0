@@ -56,30 +56,31 @@ const userController = {
     // will add patch request to front end to pass username in body from profile(rn profile has access to current user)
     // we will send a request to what will be passed into the func sending this request(ex: onClick:{() => handleTrackerIncr(burged)} /user/add/${arg} )
     async addToTracker(req, res, next) {
-        try {
-            // define our tracker given to params
-            const tracker = req.params.tracker;
-            // find doc of our user, username will be passed in body, we increment the tracker
-            const user = await User.findOneAndUpdate({ username: req.body.username},
-                { $inc: { [tracker]: 1 } },
-                { new: true }
-            );
-            // we pass the user to locals to respond with it
-            res.locals.userTrackerIncremented = user[tracker];
-            return next()
-        // here we error handle incase there is a wrong input to our collection
-        } catch (err) {
-            return next({
-                log: `err: ${err}`,
-                status: 500,
-                message: { err: 'error in usercontroller.signup middleware' }
-            })
-        }
-    },
+      try {
+          // define our tracker given to params
+          const tracker = req.params.tracker;
+          // find doc of our user, username will be passed in body, we increment the tracker
+          const user = await User.findOneAndUpdate({ username: req.body.username},
+              { $inc: { [tracker]: 1 } },
+              { new: true }
+          );
+          // we pass the user to locals to respond with it
+          console.log(user[tracker])
+          res.locals.userTrackerIncremented = user[tracker];
+          return next()
+      // here we error handle incase there is a wrong input to our collection
+      } catch (err) {
+          return next({
+              log: `err: ${err}`,
+              status: 500,
+              message: { err: 'error in usercontroller.signup middleware' }
+          })
+      }
+  },
 
     async addSocials(req, res, next) {
         try{
-            // we define our socials, the links are sent in an array
+            // we define our socials, the links are sent in an object
             const socials = req.body.socials;
             // we find our user and update their socials
             const user = await User.findAndUpdate({ username: req.body.username },
