@@ -31,14 +31,14 @@ export default function Nav({ loggedIn, currUser, signout, profile }) {
           </div>
         ) : (
           <div className="ml-auto">
-            <div className="flex">
+            <div>
               <Link
                 to="/Profile"
                 className="mr-8 animate-pulse bg-indigo-500 shadow-lg shadow-indigo-500/50 text-2xl font-extrabold ...  font-robotics bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-10 ......"
               >{`Hello, ${currUser.username}`}</Link>
 
               <button
-                className="animate-pulse bg-indigo-500 shadow-lg shadow-indigo-500/50 text-2xl font-extrabold ... font-robotics bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-10  ......"
+                className="mr-4 animate-pulse bg-indigo-500 shadow-lg shadow-indigo-500/50 text-2xl font-extrabold ... font-robotics bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-10  ......"
                 onClick={() => signout()}
               >
                 Signout
