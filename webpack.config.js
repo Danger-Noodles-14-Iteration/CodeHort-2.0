@@ -35,7 +35,13 @@ module.exports = {
             {
                 test: /\.css$/i,
                 use: ['style-loader', 'css-loader', 'postcss-loader'],
-              },
+            },
+            {
+                test: /\.(mp4|gif)$/i,
+                use: {
+                  loader: 'file-loader'
+                }
+            }
         ]
     }
 
