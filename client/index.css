@@ -32,3 +32,16 @@
   display: flex;
   justify-content: space-between;
 }
+
+.popup-modal > .info-container > header > h1 {
+  font-size: 2rem;
+}
+
+.popup-modal > .info-container > section {
+  margin-top: 50px;
+}
+
+.popup-modal > .info-container > section > .counter-container {
+  display: flex;
+  justify-content: space-between;
+}

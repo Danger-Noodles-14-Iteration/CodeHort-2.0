@@ -36,13 +36,13 @@ const App = () => {
     try {
       const response = await fetch(`/user/${name}`);
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
+      setCurrentStudent({...data});
+      // console.log(currentStudent);
+      setModalState(true);
     } catch (err) {
       alert(`ERROR: ${err}`);
     }
-
-    setModalState(true);
-
   }
 
   //************************ fetch requests ************************* */
@@ -109,7 +109,7 @@ const App = () => {
 
   return (
     <div className="dark:bg-gray-800">
-      {modalState ? <PopupModal setModalState={setModalState} /> : null}
+      {modalState ? <PopupModal setModalState={setModalState} currentStudent={currentStudent} /> : null}
       <Nav currUser={currUser} signout={signout} loggedIn={loggedIn} />
       <Routes>
         <Route
