@@ -108,6 +108,7 @@ const App = () => {
 
   return (
     <div className="">
+      {modalState ? <PopupModal setModalState={setModalState} /> : null}
       <Nav currUser={currUser} signout={signout} loggedIn={loggedIn} />
       <Routes>
         <Route
