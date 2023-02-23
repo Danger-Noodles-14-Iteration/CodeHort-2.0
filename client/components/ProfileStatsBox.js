@@ -23,17 +23,11 @@ export default function ProfileStatsBox({ currUser }) {
 
   console.log("statsCardArray: ", statsCardArray);
 
-  // keysInUser.map((key) => {
-  //   if (key === 'username' || key === 'password' || key === 'isAdmin') continue;
-  //   let newCard = <ProfileStatsCard stat={currUser[key]} />;
-  //   statsCardArray.push(newCard);
-  // });
-
   return (
     
     <div className="flex flex-col items-center">
 
-      <h1>{props.user.username}</h1>
+      <h1>{currUser.username}</h1>
       {statsCardArray}
     </div>
   
