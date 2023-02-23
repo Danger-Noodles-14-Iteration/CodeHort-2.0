@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
+import PopupModal from './PopupModal';
 
-const Home = ({ allCohorts, getAllCohorts, createUser }) => {
-  const [chosenCohort, setChosenCohort] = useState("");
-  const [studentsArray, setStudentsArray] = useState("");
-  const [openStudentsArray, setOpenStudentsArray] = useState(false);
-  const [newCohort, setNewCohort] = useState("");
-  const [chosenStudent, setChosenStudent] = useState("");
-  const [newStudent, setNewStudent] = useState("");
-  const [newStudentCohort, setNewStudentCohort] = useState("");
+
+const Home = ({ allCohorts, getAllCohorts, createUser, getOneStudent }) => {
+  const [chosenCohort, setChosenCohort] = useState('')
+  const [studentsArray, setStudentsArray] = useState('')
+  const [openStudentsArray, setOpenStudentsArray] = useState(false)
+  const [newCohort, setNewCohort] = useState('')
+  const [chosenStudent, setChosenStudent] = useState('')
+  const [newStudent, setNewStudent] = useState('')
+  const [newStudentCohort, setNewStudentCohort] = useState('')
 
   const handleNewStudent = (e) => {
     setNewStudent(e.target.value);
@@ -69,20 +71,29 @@ const Home = ({ allCohorts, getAllCohorts, createUser }) => {
     setChosenCohort(chosenCohort[0]);
     let students = chosenCohort[0].students.map((obj) => {
       return (
-        <div
-          key={obj._id}
-          className="font-robotics bg-gradient-to-bl w-48 h-24 text-white from-slate-900 via-gray-600 to-fuchsia-900 rounded   hover:bg-slate-500 border border-black"
-        >
-          <h1 className="text-2xl">{obj.username}</h1>
-          <div className="text-md">{obj.cohort}</div>
-          <div>{obj.participation}</div>
-        </div>
-      );
-    });
-    setOpenStudentsArray((prev) => !prev);
-    console.log(openStudentsArray);
-    setStudentsArray(students);
-  };
+
+        <div key={obj._id}
+        className="font-robotics bg-gradient-to-bl w-48 h-24 text-white from-slate-900 via-gray-600 to-fuchsia-900 rounded   hover:bg-slate-500 border border-black"
+        onClick={(e) => handleStudentClicked(e)}
+      >
+        <h1 className='text-2xl'>{obj.username}</h1>
+        <div className='text-md'>{obj.cohort}</div>
+        <div>{obj.participation}</div>
+      </div>
+    
+      )
+
+    })
+    setOpenStudentsArray(prev => !prev)
+    console.log(openStudentsArray)
+    setStudentsArray(students)
+  }
+
+  const handleStudentClicked = (e) => {
+    console.log(e.target.firstChild.textContent);
+    getOneStudent(e.target.firstChild.textContent);
+  }
+
   const handleCohortReset = async () => {
     let res = await fetch(`cohort/resetcohort/${chosenCohort.cohort}`, {
       method: "PATCH",
@@ -111,30 +122,30 @@ const Home = ({ allCohorts, getAllCohorts, createUser }) => {
     setChosenCohort(res.cohort);
     let students = res.cohort.students.map((obj) => {
       return (
-        <div
-          key={obj._id}
-          className="font-robotics bg-gradient-to-bl w-48 h-24 text-white from-slate-900 via-gray-600 to-fuchsia-900 rounded   hover:bg-slate-500 border border-black"
-        >
-          <h1 className="text-2xl">{obj.username}</h1>
-          <div className="text-md">{obj.cohort}</div>
-          <div>{obj.participation}</div>
-        </div>
-      );
-    });
-    setStudentsArray(students);
-    setChosenStudent(res.user);
-  };
+        <div key={obj._id}
+        className="font-robotics bg-gradient-to-bl w-48 h-24 text-white from-slate-900 via-gray-600 to-fuchsia-900 rounded   hover:bg-slate-500 border border-black"
 
-  const cohort = allCohorts.map((obj) => (
-    <div
-      className='cursor-pointer rounded-br-lg bg-gradient-to-bl from-fuchsia-900 via-gray-600 to-fuchsia-900 hover:bg-indigo-500 shadow-lg shadow-indigo-500/50 text-2xl font-extrabold ...text-white font-robotics bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500... hover:text-black w-fit p-4 border border-black  hover:shadow-[0_4px_0px_rgb(222, 111, 12)] text-indigo bg-white ease-out hover:translate-y-1 transition-all rounded">
+      >
+        <h1 className='text-2xl'>{obj.username}</h1>
+        <div className='text-md'>{obj.cohort}</div>
+        <div>{obj.participation}</div>
+      </div>
+      )
+    })
+    setStudentsArray(students)
+    setChosenStudent(res.user)
+  }
+
+
+  const cohort = allCohorts.map(obj => <div
+    className='cursor-pointer rounded-br-lg bg-gradient-to-bl from-fuchsia-900 via-gray-600 to-fuchsia-900 hover:bg-indigo-500 shadow-lg shadow-indigo-500/50 text-2xl font-extrabold ...text-white font-robotics bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500... hover:text-black w-fit p-4 border border-black  hover:shadow-[0_4px_0px_rgb(222, 111, 12)] text-indigo bg-white ease-out hover:translate-y-1 transition-all rounded">
     hover effect 1'
       onClick={() => handleClickedCohort(obj._id)}
       key={obj._id}
     >
       {`Cohort ${obj.cohort}`}
     </div>
-  ));
+  );
 
   return (
     <>

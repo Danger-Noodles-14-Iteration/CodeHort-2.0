@@ -43,26 +43,76 @@ const userController = {
     }
   },
 
-  async addpoint(req, res, next) {
-    try {
-      const user = await User.findOneAndUpdate(
-        { username: req.body.username },
-        { $inc: { participation: 1 } },
-        { new: true }
-      );
-      user.save();
-      //possibly redirect to signup page with then
+    async getUser(req, res, next) {
+        // we find our user from the collection
+        const username = req.params.username;
+        const user = await User.findOne({ username: username });
+        // pass user in locals
+        res.locals.user = user;
+        return next();
+    },
+    
+    // removed the addpoint method
+    // will add patch request to front end to pass username in body from profile(rn profile has access to current user)
+    // we will send a request to what will be passed into the func sending this request(ex: onClick:{() => handleTrackerIncr(burged)} /user/add/${arg} )
+    async addToTracker(req, res, next) {
+        try {
+            // define our tracker given to params
+            const tracker = req.params.tracker;
+            // find doc of our user, username will be passed in body, we increment the tracker
+            const user = await User.findOneAndUpdate({ username: req.body.username},
+                { $inc: { [tracker]: 1 } },
+                { new: true }
+            );
+            // we pass the user to locals to respond with it
+            res.locals.userTrackerIncremented = user[tracker];
+            return next()
+        // here we error handle incase there is a wrong input to our collection
+        } catch (err) {
+            return next({
+                log: `err: ${err}`,
+                status: 500,
+                message: { err: 'error in usercontroller.signup middleware' }
+            })
+        }
+    },
 
-      res.locals.user = user;
-      return next();
-    } catch (err) {
-      return next({
-        log: `err: ${err}`,
-        status: 500,
-        message: { err: "error in usercontroller.signup middleware" },
-      });
-    }
-  },
+    async addSocials(req, res, next) {
+        try{
+            // we define our socials, the links are sent in an array
+            const socials = req.body.socials;
+            // we find our user and update their socials
+            const user = await User.findAndUpdate({ username: req.body.username },
+                { socials: socials},
+                { new: true });
+            // we presist our user to locals to respond w user obj
+            res.locals.user = user;
+            return next();
+        } catch (err) {
+            return next({
+                log: `err: ${err}`,
+                status: 500,
+                message: { err: 'error in usercontroller.addSocials middleware' }
+            })
+        }
+    },
+
+    async getSocials(req, res, next) {
+        try{
+            // we find our user and grab their socials
+            const user = await User.findOne({ username: req.body.username });
+            const socials = user.socials;
+            // we presist our user to locals to respond w user obj
+            res.locals.userSocials = socials;
+            return next();
+        } catch (err) {
+            return next({
+                log: `err: ${err}`,
+                status: 500,
+                message: { err: 'error in usercontroller.addSocials middleware' }
+            })
+        }
+    },
 
   async delete(req, res, next) {
     const cohort = await Cohort.findOneAndUpdate(

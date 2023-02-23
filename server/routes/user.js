@@ -14,9 +14,37 @@ router.post("/login", userController.login, (req, res, next) => {
   res.status(200).json(res.locals.user);
 });
 
-router.patch("/addpoint", userController.addpoint, (req, res, next) => {
+// this grabs the our user
+router.get("/:username",
+userController.getUser,
+(req,res,next) => {
   res.status(200).json(res.locals.user);
-});
+}
+)
+
+// a route to handle increment to a particular tracker prop
+router.patch("/add/:tracker",
+userController.addToTracker,
+(req,res,next) => {
+  res.status(200).json(res.locals.userTrackerIncremented);
+}
+)
+
+// this adds the socials of our users
+router.patch("/socials",
+userController.addSocials,
+(req,res,next) => {
+  res.status(200).json(res.locals.user);
+}
+)
+
+// this grabs the socials of our users
+router.get("/socials",
+userController.getSocials,
+(req,res,next) => {
+  res.status(200).json(res.locals.userSocials);
+}
+)
 
 router.delete("/delete/:cohort", userController.delete, (req, res, next) => {
   res.status(200).json(res.locals.cohort);

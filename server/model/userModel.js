@@ -1,13 +1,24 @@
-const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
 
+
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+
+// we removed the participation prop and adding trackers and a socials prop which will contain strings on the links in an array
 const UserSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   cohort: { type: Number, required: true },
-  participation: { type: Number, default: 0 },
-  isAdmin: { type: String, default: "" },
-});
+  raisedHand: { type: Number, default: 0 },
+  codeOfConduct: { type: Number, default: 0 },
+  powerClap: { type: Number, default: 0 },
+  burged: { type: Number, default: 0 },
+  stretches: { type: Number, default: 0 },
+  calledOn: { type: Number, default: 0 },
+  hourTracker: { type: Number, default: 0 },
+  // ?
+  socials: { type: Object, default: {} },
+  isAdmin: { type: String, default: "" }
+})
 
 UserSchema.pre("save", async function (next) {
   const saltRounds = 10;
