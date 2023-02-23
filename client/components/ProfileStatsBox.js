@@ -14,7 +14,7 @@ export default function ProfileStatsBox({ currUser }) {
 
   for (let i = 0; i < keysInUser.length; i++) {
     let key = keysInUser[i];
-    if (key === "username" || key === "password" || key === "isAdmin" || key === "__v" || key === "_id") continue;
+    if (key === "username" || key === "password" || key === "isAdmin" || key === "__v" || key === "_id" || key === "cohort") continue;
     let newCard = (
       <ProfileStatsCard key={i} user={currUser} stat={currUser[key]} tracker={key} />
     );
@@ -25,9 +25,7 @@ export default function ProfileStatsBox({ currUser }) {
 
   return (
     
-    <div className="flex flex-col items-center">
-
-      <h1>{currUser.username}</h1>
+    <div className="grid grid-cols-4 gap-4 justify-items-stretch">
       {statsCardArray}
     </div>
   
