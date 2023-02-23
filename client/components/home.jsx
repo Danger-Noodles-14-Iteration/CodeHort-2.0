@@ -148,7 +148,7 @@ const Home = ({ allCohorts, getAllCohorts, createUser, getOneStudent }) => {
   );
 
   return (
-    <div>
+    <>
       <div className="flex justify-between my-8 mx-24">
         <div>
           <div className="flex items-end justify-end gap-4 text-2xl font-extrabold font-robotics bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500">
@@ -184,7 +184,7 @@ const Home = ({ allCohorts, getAllCohorts, createUser, getOneStudent }) => {
         <div>
           <input
             type="number"
-            className="font-robotics border border-black px-2 py-1 rounded-lg mr-2"
+            className="font-robotics border border-black px-2 py-1 rounded-lg mr-2 dark:bg-slate-500"
             value={newCohort}
             onChange={(e) => handleNewCohort(e)}
           />
@@ -202,17 +202,17 @@ const Home = ({ allCohorts, getAllCohorts, createUser, getOneStudent }) => {
       <div className="mx-18 mt-8 gap-2 flex  flex-wrap justify-center">
         {openStudentsArray ? studentsArray : null}
       </div>
-      <div className="text-center mr-8 mt-8">
+      <div className="text-center mr-8 mt-8 dark:text-white">
         <input
           placeholder="first and last name"
-          className="font-robotics border border-black px-2 py-1 rounded-lg mr-2"
+          className="font-robotics border border-black px-2 py-1 rounded-lg mr-2 dark:bg-slate-500 "
           value={newStudent}
           onChange={(e) => handleNewStudent(e)}
         />
         <input
           placeholder="cohort"
           type="number"
-          className="font-robotics border border-black px-2 py-1 rounded-lg mr-2"
+          className="font-robotics border border-black px-2 py-1 rounded-lg mr-2 dark:bg-slate-500"
           value={newStudentCohort}
           onChange={(e) => handleNewStudentCohort(e)}
         />
@@ -223,7 +223,7 @@ const Home = ({ allCohorts, getAllCohorts, createUser, getOneStudent }) => {
           Add student
         </button>
       </div>
-    </div>
+    </>
   );
 };
 
