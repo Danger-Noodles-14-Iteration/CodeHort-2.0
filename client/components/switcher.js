@@ -20,6 +20,8 @@ export default function Switcher() {
         checked={darkSide}
         onChange={toggleDarkMode}
         size={30}
+        sunColor={"yellow"}
+        moonColor={"lightgrey"}
       />
     </>
   );
