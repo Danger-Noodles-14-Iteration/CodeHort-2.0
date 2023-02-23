@@ -36,6 +36,7 @@ const App = () => {
     try {
       const response = await fetch(`/user/${name}`);
       const data = await response.json();
+      console.log(data);
     } catch (err) {
       alert(`ERROR: ${err}`);
     }
